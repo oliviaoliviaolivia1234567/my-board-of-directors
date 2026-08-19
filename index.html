@@ -1,0 +1,1091 @@
+<!--
+  My Board of Directors — Public Release v1.0
+  License: CC BY-NC 4.0 (비상업적 사용만 허용, 상업적 이용 금지) — 자세한 내용은 LICENSE 파일 참고
+  본 프로젝트에 등장하는 인물 페르소나는 공개된 발언·저서·인터뷰를 바탕으로 재구성한
+  AI 시뮬레이션(패러디/논평 목적)이며, 실제 발언이 아니고 해당 인물·기관의 승인을 받지 않았습니다.
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<title>My Board of Directors — 마이 보드 디렉터</title>
+<style>
+html{font-size:95%}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --mint:#1AAE7E;--mint-light:#E3F6EE;--mint-dark:#0E8A63;--mint-pale:#EFFBF5;
+  --blue:#1AAE7E;--blue-light:#E3F6EE;--blue-dark:#0E8A63;
+  --bg:#F4F5F6;--white:#FFFFFF;
+  --gray50:#F7F8F8;--gray100:#EEF0F0;--gray200:#E2E5E6;--gray300:#CDD2D4;
+  --gray400:#A3AAAD;--gray500:#7E878B;--gray600:#5C6569;--gray700:#3F474A;
+  --gray800:#262C2E;--gray900:#15191A;
+  --green:#1AAE7E;--green-light:#E3F6EE;
+  --orange:#E8985A;--red:#E0625A;--purple:#8B6FB5;--yellow:#D9A23B;
+  --r6:6px;--r10:10px;--r12:12px;--r16:16px;--r20:20px;
+  --shadow-sm:0 1px 2px rgba(20,25,26,.05);--shadow:0 4px 16px rgba(20,25,26,.07);
+}
+body{zoom:0.95;background:var(--bg);color:var(--gray900);font-family:'Pretendard',-apple-system,'Noto Sans KR',sans-serif;font-size:14px;line-height:1.5;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:64px;background:var(--white);border-bottom:1px solid var(--gray200);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0}
+.logo-mark{width:34px;height:34px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark span{width:9px;height:9px;border-radius:50%;background:white}
+.logo{font-size:17px;font-weight:700;color:var(--gray900);letter-spacing:-.3px;white-space:nowrap}.logo b{color:var(--mint)}
+.topbar-search{flex:1;max-width:560px;display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--gray200);border-radius:var(--r12);background:var(--gray50);color:var(--gray400);font-size:13px}
+.top-badge{font-size:11px;padding:3px 8px;border-radius:20px;background:var(--blue-light);color:var(--blue);font-weight:600}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.top-avatars{display:flex;align-items:center}
+.top-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border:2px solid var(--white);margin-left:-7px}
+.top-count{font-size:12.5px;color:var(--gray600);white-space:nowrap}
+.top-gear{width:30px;height:30px;border-radius:50%;border:1px solid var(--gray200);display:flex;align-items:center;justify-content:center;color:var(--gray400);font-size:14px;flex-shrink:0}
+.shell{display:flex;flex:1;overflow:hidden;padding:14px;gap:14px}
+.sidebar{flex:4.4;background:var(--white);border:1px solid var(--gray200);border-radius:var(--r16);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;min-width:0}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:2px}
+.s-section{padding:16px 14px 8px}
+.s-label{font-size:11px;font-weight:600;color:var(--gray400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.panel-head{font-size:14px;font-weight:700;color:var(--gray900);padding:14px 14px 10px}
+.mode-btn{display:flex;align-items:center;gap:12px;width:100%;padding:11px 12px;border-radius:var(--r12);border:none;background:transparent;cursor:pointer;transition:all .15s;text-align:left;margin-bottom:3px}
+.mode-btn:hover{background:var(--gray50)}.mode-btn.active{background:var(--mint-light)}
+.mode-icon{font-size:15px;width:30px;height:30px;text-align:center;flex-shrink:0;color:var(--gray600);background:var(--gray100);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.mode-btn.active .mode-icon{color:var(--mint-dark);background:var(--white)}
+.mode-icon i{vertical-align:0}
+.mode-info{flex:1}
+.mode-name{font-size:14px;font-weight:600;color:var(--gray800)}.mode-btn.active .mode-name{color:var(--mint-dark)}
+.mode-desc{font-size:11px;color:var(--gray400);margin-top:2px}
+.s-divider{height:1px;background:var(--gray100);margin:10px 14px}
+.diff-row{display:flex;gap:6px;padding:0 14px 16px}
+.diff-btn{flex:1;padding:9px 14px;border-radius:var(--r10);border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .15s}
+.diff-btn.active{background:var(--gray800);border-color:var(--gray800);color:white}
+.center-col{flex:9.0;background:var(--white);border:1px solid var(--gray200);border-radius:var(--r16);display:flex;flex-direction:column;overflow:hidden;min-width:0;transition:flex .3s ease}
+.center-col.collapsed{flex:0;min-width:0;border-width:0;overflow:hidden}
+.center-col.collapsed .psec-head,.center-col.collapsed .pgrid-wrap{display:none}
+.collapse-toggle{width:22px;height:44px;align-self:center;flex-shrink:0;border:1px solid var(--gray200);background:var(--white);border-radius:8px;color:var(--gray500);font-size:16px;cursor:pointer;transition:all .15s}
+.collapse-toggle:hover{border-color:var(--mint);color:var(--mint)}
+.collapse-toggle.flipped{transform:scaleX(-1)}
+.psec-head{display:flex;align-items:center;gap:10px;padding:14px 18px;flex-shrink:0;flex-wrap:nowrap}
+.psec-title{font-size:13px;font-weight:600;color:var(--gray800)}
+.psec-actions{margin-left:auto;display:flex;gap:6px;flex-shrink:0}
+.opt-btn{padding:6px 12px;border-radius:20px;border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:11.5px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.opt-btn:hover{border-color:var(--mint);color:var(--mint)}
+.cat-wrap{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto}
+.cat-wrap::-webkit-scrollbar{display:none}
+.cat-chip{padding:5px 11px;border-radius:20px;border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:11.5px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.cat-chip:hover{border-color:var(--gray400)}.cat-chip.active{background:var(--gray900);border-color:var(--gray900);color:white}
+.pgrid-wrap{flex:1;overflow-y:auto;padding:4px 18px 18px}
+.pgrid-wrap::-webkit-scrollbar{width:4px}.pgrid-wrap::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:2px}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pc{border-radius:var(--r12);padding:11px 6px 8px;cursor:pointer;transition:all .15s;text-align:center;position:relative;background:var(--white);border:1px solid var(--gray200)}
+.pc:hover{background:var(--gray50)}.pc.sel{background:var(--mint-light);border-color:var(--mint)}.pc.hidden{display:none}
+.pc.team-a{background:#FCEBEB;border-color:#E24B4A}
+.pc.team-b{background:#E6F1FB;border-color:#378ADD}
+.team-badge{position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;color:white;border:1.5px solid var(--white)}
+.pc.team-a .team-badge{background:#E24B4A}
+.pc.team-b .team-badge{background:#378ADD}
+.pav{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin:0 auto 6px;position:relative;overflow:hidden}
+.cstar{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:var(--yellow);font-size:7px;display:flex;align-items:center;justify-content:center;color:white}
+.pname{font-size:12px;font-weight:500;color:var(--gray700);line-height:1.3}.pc.sel .pname{color:var(--mint-dark);font-weight:600}
+.pchk{position:absolute;top:6px;right:6px;width:15px;height:15px;border-radius:50%;background:var(--mint);color:white;font-size:8px;display:none;align-items:center;justify-content:center}.pc.sel .pchk{display:flex}
+.right-col{flex:14.0;background:var(--white);border:1px solid var(--gray200);border-radius:var(--r16);display:flex;flex-direction:column;overflow:hidden;min-width:0;transition:flex .3s ease}
+.rc-head{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--gray100);flex-shrink:0;flex-wrap:wrap}
+.rc-label{font-size:13px;font-weight:600;color:var(--gray800);display:flex;align-items:center;gap:6px}
+.opt-row{display:flex;gap:6px;flex-wrap:wrap}
+.opt-row .opt-btn.active{background:var(--mint);border-color:var(--mint);color:white}
+.mode-toggle{margin-left:auto;display:flex;gap:0;border:1px solid var(--gray200);border-radius:var(--r10);overflow:hidden}
+.mode-toggle button{padding:7px 14px;border:none;background:var(--white);font-size:12px;font-weight:600;color:var(--gray600);cursor:pointer}
+.mode-toggle button.on{background:var(--mint);color:white}
+.content{padding:12px 18px}
+.content::-webkit-scrollbar{width:4px}.content::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:2px}
+.form-group{margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.form-group.stack{flex-direction:column;align-items:stretch}
+.form-label{font-size:12px;font-weight:500;color:var(--gray500);flex-shrink:0;white-space:nowrap}
+.form-input{flex:1;padding:10px 14px;border:1px solid var(--gray200);border-radius:var(--r10);background:var(--white);color:var(--gray900);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--mint)}
+textarea.form-input{resize:none;min-height:60px}
+.btn-row{display:flex;gap:6px;flex-wrap:nowrap;margin-bottom:0}
+.btn-main{padding:9px 14px;border-radius:var(--r10);border:none;background:var(--mint);color:white;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.btn-main:hover{background:var(--mint-dark)}
+.btn-sub{padding:9px 12px;border-radius:var(--r10);border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.btn-sub:hover{border-color:var(--mint);color:var(--mint)}
+.hint-box{padding:10px 12px;background:var(--mint-pale);border-left:3px solid var(--mint);border-radius:var(--r10);font-size:12px;color:var(--mint-dark);margin:0 18px 14px}
+.result-box{background:var(--white);border:1px solid var(--green);border-radius:var(--r10);padding:14px;margin:0 18px 16px;display:none}
+.result-box.show{display:block}
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.result-title{font-size:13px;font-weight:600;color:var(--green)}
+.copy-btn{padding:5px 12px;border-radius:var(--r10);border:1px solid var(--green);background:transparent;color:var(--green);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s}
+.copy-btn.copied{background:var(--green);color:white}
+.result-preview{background:var(--gray50);border-radius:var(--r10);padding:10px;font-size:11px;color:var(--gray600);line-height:1.6;max-height:160px;overflow-y:auto;white-space:pre-wrap;word-break:break-word}
+.chat-box{flex:1;overflow-y:auto;padding:18px;display:none}
+.chat-box.show{display:block}
+.chat-box::-webkit-scrollbar{width:4px}.chat-box::-webkit-scrollbar-thumb{background:var(--gray200);border-radius:2px}
+.chat-status{font-size:12px;color:var(--gray500);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.bubble-msg-unattributed{background:var(--gray50);border:1px dashed var(--gray300);border-radius:var(--r12);padding:10px 14px;font-size:13.5px;line-height:1.65;color:var(--gray700);margin-bottom:14px;white-space:pre-wrap;word-break:break-word}
+.dot-pulse{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+.bubble-row{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.bubble-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;overflow:hidden}
+.bubble-col{flex:1;min-width:0}
+.bubble-name{font-size:12.5px;font-weight:700;color:var(--gray700);margin-bottom:4px;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--gray400);text-underline-offset:3px;display:inline-block}
+.bubble-av{cursor:pointer}
+.profile-card-fixed{position:fixed;width:230px;background:rgba(38,44,46,0.96);color:#fff;border-radius:var(--r12);padding:10px 12px;font-size:12px;line-height:1.55;font-weight:400;z-index:9999;box-shadow:0 6px 20px rgba(0,0,0,.25);pointer-events:none}
+.profile-card-fixed .pc-name{font-weight:700;font-size:13px;margin-bottom:3px;color:#fff}
+.profile-card-fixed .pc-desc{color:rgba(255,255,255,0.85)}
+.bubble-msg{background:var(--gray50);border:1px solid var(--gray100);border-radius:2px 14px 14px 14px;padding:10px 14px;font-size:13.5px;line-height:1.65;color:var(--gray800);white-space:pre-wrap;word-break:break-word}
+.bubble-row.me{flex-direction:row-reverse}
+.bubble-row.me .bubble-msg{background:var(--mint-light);border-color:var(--mint-light);border-radius:14px 2px 14px 14px;color:var(--mint-dark)}
+.bubble-row.me .bubble-name{text-align:right}
+.bubble-tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:10px;background:#FFF3E0;color:var(--orange);font-size:10px;font-weight:600}
+.vote-block{background:var(--gray50);border:1px solid var(--gray200);border-radius:var(--r10);padding:14px;margin-top:10px;font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.user-turn{margin-top:14px;padding:14px;background:var(--mint-pale);border-radius:var(--r12);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.user-turn input{flex:1;min-width:160px;padding:9px 14px;border:1px solid var(--gray200);border-radius:var(--r10);font-size:13px}
+.speed-ctrl{display:flex;align-items:center;gap:4px;padding:10px 18px;border-top:1px solid var(--gray100)}
+.speed-label{font-size:11px;color:var(--gray400);margin-right:4px}
+.speed-btn{padding:5px 11px;border-radius:14px;border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s}
+.speed-btn:hover{border-color:var(--mint);color:var(--mint)}
+.speed-btn.on{background:var(--gray800);border-color:var(--gray800);color:white}
+.loading-card{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--gray50);border-radius:var(--r12)}
+.loading-spinner{width:24px;height:24px;border:2.5px solid var(--gray200);border-top-color:var(--mint);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13.5px;color:var(--gray700);font-weight:500}
+.loading-sub{font-size:11.5px;color:var(--gray400);margin-top:2px}
+.loading-elapsed{margin-left:auto;font-size:12px;color:var(--gray400);font-variant-numeric:tabular-nums}
+/* === 원탁 시각화 === */
+.table-stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto;min-height:0;transition:flex .25s}
+.table-stage.active{flex:0 0 auto;padding:12px 24px;flex-direction:row;justify-content:flex-start;gap:14px;border-bottom:1px solid var(--gray100)}
+.table-stage.active .table-wrap{width:64px;height:64px;margin:0;flex-shrink:0}
+.table-stage.active .table-center{width:40px;height:40px}
+.table-stage.active .table-center .t-label,.table-stage.active .table-center .t-count{display:none}
+.table-stage.active .table-center .dots span{width:4px;height:4px}
+.table-stage.active .seat{width:22px;height:22px;font-size:9px;border-width:1.5px}
+.table-stage.active .table-empty{display:none}
+.table-wrap{position:relative;width:282px;height:282px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.table-ring{position:absolute;width:282px;height:282px;border:1.5px dashed var(--gray300);border-radius:50%}
+.table-center{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at center,var(--white) 0%,var(--mint-light) 70%,var(--mint) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:2}
+.table-center .dots{display:flex;gap:6px}
+.table-center .dots span{width:7px;height:7px;border-radius:50%;background:var(--mint)}
+.table-center .t-label{font-size:15px;font-weight:700;color:var(--gray900)}
+.table-center .t-count{font-size:12px;color:var(--gray500)}
+.seat{position:absolute;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;box-shadow:0 2px 6px rgba(20,25,26,.1);z-index:3;animation:seatIn .35s ease backwards;border:2.5px solid var(--white);overflow:hidden}
+@keyframes seatIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.table-empty{text-align:center;margin-top:28px}
+.table-empty .t-title{font-size:17px;font-weight:700;color:var(--gray800);margin-bottom:8px}
+.table-empty .t-sub{font-size:13px;color:var(--gray500);line-height:1.7;max-width:300px}
+.table-empty .t-sub{font-size:13px;color:var(--gray500);line-height:1.7;max-width:300px}
+@media(max-width:1000px){.shell{flex-direction:column}.sidebar{width:auto}}
+
+/* === API 설정 모달 === */
+.top-gear{cursor:pointer;position:relative;transition:all .15s}
+.top-gear:hover{border-color:var(--mint);color:var(--mint)}
+.top-gear .key-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;border-radius:50%;background:var(--gray300);border:1.5px solid var(--white)}
+.top-gear.has-key .key-dot{background:var(--mint)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(21,25,26,.5);z-index:9998;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-panel{background:var(--white);border-radius:var(--r16);width:100%;max-width:480px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--gray100)}
+.modal-title{font-size:15px;font-weight:700;color:var(--gray900);display:flex;align-items:center;gap:8px}
+.modal-close{width:28px;height:28px;border-radius:50%;border:none;background:var(--gray50);color:var(--gray500);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--gray100)}
+.modal-body{padding:18px 20px}
+.provider-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:16px}
+.provider-tab{padding:10px 8px;border-radius:var(--r10);border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.provider-tab.active{background:var(--mint-light);border-color:var(--mint);color:var(--mint-dark)}
+.settings-field{margin-bottom:14px}
+.settings-field label{display:block;font-size:12px;font-weight:600;color:var(--gray600);margin-bottom:6px}
+.settings-field input,.settings-field select{width:100%;padding:10px 12px;border:1px solid var(--gray200);border-radius:var(--r10);font-size:13px;font-family:inherit;outline:none;background:var(--white);color:var(--gray900)}
+.settings-field input:focus,.settings-field select:focus{border-color:var(--mint)}
+.settings-hint{font-size:11.5px;color:var(--gray400);margin-top:6px;line-height:1.6}
+.settings-hint a{color:var(--mint-dark);text-decoration:underline}
+.settings-warn{background:#FFF7ED;border:1px solid #FBD9A8;border-radius:var(--r10);padding:10px 12px;font-size:11.5px;color:#92600E;line-height:1.6;margin-bottom:16px}
+.modal-foot{display:flex;gap:8px;padding:16px 20px;border-top:1px solid var(--gray100)}
+.modal-foot .btn-main{flex:1;padding:11px}
+.modal-foot .btn-sub{flex-shrink:0}
+.settings-status{font-size:11.5px;margin-top:8px;min-height:16px}
+.settings-status.ok{color:var(--mint-dark)}
+.settings-status.err{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo-mark"><span></span></div>
+  <div class="logo">My Board of <b>Directors</b></div>
+  <div class="top-badge" title="본 앱의 모든 인물은 공개 정보를 바탕으로 한 AI 페르소나 시뮬레이션이며, 실제 발언이 아니고 본인·소속 기관의 승인을 받지 않았습니다.">AI 시뮬레이션 · 패러디</div>
+  <div class="topbar-search">
+    <span><i class="ph ph-magnifying-glass"></i></span>
+    <textarea id="topic" rows="1" placeholder="토론 주제 입력..." style="flex:1;border:none;background:transparent;font-size:13px;font-family:inherit;outline:none;resize:none;color:var(--gray900);padding:0"></textarea>
+  </div>
+  <div class="top-right">
+    <div class="top-avatars" id="topAvatars"></div>
+    <div class="top-count"><span id="selcount">0</span>명 선택</div>
+    <div class="top-gear" id="topGear" onclick="openSettings()" title="API 키 설정"><i class="ph ph-gear-six"></i><span class="key-dot"></span></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div class="modal-title"><i class="ph ph-key"></i> AI 제공자 · API 키 설정</div>
+      <button class="modal-close" onclick="closeSettings()"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="provider-tabs" id="providerTabs">
+        <button class="provider-tab" data-provider="anthropic" onclick="setProvider('anthropic')">Anthropic (Claude)</button>
+        <button class="provider-tab" data-provider="openai" onclick="setProvider('openai')">OpenAI (GPT)</button>
+        <button class="provider-tab" data-provider="gemini" onclick="setProvider('gemini')">Google (Gemini)</button>
+        <button class="provider-tab" data-provider="custom" onclick="setProvider('custom')">커스텀 (OpenAI 호환)</button>
+      </div>
+
+      <div class="settings-field" id="baseUrlField" style="display:none">
+        <label>API Base URL</label>
+        <input type="text" id="baseUrlInput" placeholder="예: https://openrouter.ai/api/v1">
+        <div class="settings-hint">OpenAI Chat Completions 형식(/chat/completions)을 지원하는 엔드포인트라면 대부분 사용 가능합니다 (OpenRouter, Groq, 로컬 LLM 서버 등).</div>
+      </div>
+
+      <div class="settings-field">
+        <label>API 키</label>
+        <input type="password" id="apiKeyInput" placeholder="sk-... / API 키 붙여넣기" autocomplete="off">
+        <div class="settings-hint" id="keyHint"></div>
+      </div>
+
+      <div class="settings-field">
+        <label>모델명</label>
+        <input type="text" id="modelInput" placeholder="모델 ID">
+        <div class="settings-hint">기본값을 그대로 써도 되고, 원하는 모델 ID로 바꿔도 됩니다.</div>
+      </div>
+
+      <div class="settings-warn"><i class="ph ph-warning-circle"></i> 입력한 API 키는 <b>이 브라우저(로컬 저장소)에만</b> 저장되며 서버로 전송되지 않습니다. 선택한 AI 제공자에게 직접 요청이 전송됩니다. 공용 PC에서는 사용 후 "키 삭제"를 눌러주세요.</div>
+
+      <div class="settings-status" id="settingsStatus"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-sub" onclick="clearSettings()">🗑 키 삭제</button>
+      <button class="btn-main" onclick="saveSettings()">저장</button>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+<aside class="sidebar">
+  <div class="s-section">
+    <div class="panel-head" style="padding:14px 14px 8px">토론 모드</div>
+    <button class="mode-btn active" data-mode="debate" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-scales"></i></div><div class="mode-info"><div class="mode-name">토론</div><div class="mode-desc">3라운드+투표</div></div></button>
+    <button class="mode-btn" data-mode="discussion" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-chats-circle"></i></div><div class="mode-info"><div class="mode-name">의논</div><div class="mode-desc">고민→조언</div></div></button>
+    <button class="mode-btn" data-mode="meeting" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-users-three"></i></div><div class="mode-info"><div class="mode-name">회의</div><div class="mode-desc">의장 주도</div></div></button>
+    <button class="mode-btn" data-mode="consulting" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-target"></i></div><div class="mode-info"><div class="mode-name">컨설팅</div><div class="mode-desc">전문가 처방</div></div></button>
+    <button class="mode-btn" data-mode="battle" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-sword"></i></div><div class="mode-info"><div class="mode-name">배틀</div><div class="mode-desc">A팀 vs B팀</div></div></button>
+    <button class="mode-btn" data-mode="interrogation" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-microphone"></i></div><div class="mode-info"><div class="mode-name">인터뷰</div><div class="mode-desc">1명과 깊은 대화</div></div></button>
+    <button class="mode-btn" data-mode="random" onclick="setMode(this)"><div class="mode-icon"><i class="ph ph-dice-five"></i></div><div class="mode-info"><div class="mode-name">랜덤</div><div class="mode-desc">예상밖 조합</div></div></button>
+  </div>
+  <div class="s-divider"></div>
+  <div class="s-label" style="padding:0 14px 8px">난이도</div>
+  <div class="diff-row">
+    <button class="diff-btn active" onclick="setDiff(this,'general')">일반</button>
+    <button class="diff-btn" onclick="setDiff(this,'expert')">전문가</button>
+  </div>
+</aside>
+
+<div class="center-col" id="centerCol">
+  <div class="psec-head" style="padding-bottom:8px">
+    <div class="panel-head" style="padding:0">참여자 선택</div>
+    <div class="psec-actions">
+      <button class="opt-btn" onclick="randomSelect()">랜덤 5명</button>
+      <button class="opt-btn" onclick="clearAll()">전체 해제</button>
+    </div>
+  </div>
+  <div class="cat-wrap" style="padding:0 18px 12px">
+    <button class="cat-chip active" data-cat="all" onclick="setCat(this)">전체</button>
+    <button class="cat-chip" data-cat="politics" onclick="setCat(this)">정치</button>
+    <button class="cat-chip" data-cat="thinker" onclick="setCat(this)">사상</button>
+    <button class="cat-chip" data-cat="economist" onclick="setCat(this)">경제</button>
+    <button class="cat-chip" data-cat="science" onclick="setCat(this)">과학</button>
+    <button class="cat-chip" data-cat="business" onclick="setCat(this)">기업</button>
+    <button class="cat-chip" data-cat="strategy" onclick="setCat(this)">전략</button>
+    <button class="cat-chip" data-cat="investor" onclick="setCat(this)">투자</button>
+    <button class="cat-chip" data-cat="custom" onclick="setCat(this)">특별</button>
+  </div>
+  <div class="pgrid-wrap"><div class="pgrid" id="pgrid"></div></div>
+</div>
+
+<button class="collapse-toggle" id="collapseToggle" onclick="toggleCenterCol()" title="참여자 패널 접기/펼치기">‹</button>
+
+<div class="right-col">
+  <div class="rc-head">
+    <div class="rc-label"><i class="ph ph-sliders-horizontal"></i> 토론 방식</div>
+    <div class="opt-row" id="orow"></div>
+    <div class="mode-toggle">
+      <button id="modeAuto" class="on" onclick="setRunMode('auto')"><i class="ph ph-lightning"></i> 자동</button>
+      <button id="modeCopy" onclick="setRunMode('copy')"><i class="ph ph-clipboard-text"></i> 복사</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="form-group" style="margin-bottom:10px">
+      <span class="form-label">내 입장</span>
+      <input type="text" class="form-input" id="uinput" placeholder="예: AI 위험론에 동의한다">
+      <div class="btn-row" id="arow" style="margin:0;flex-shrink:0"></div>
+    </div>
+    <div class="hint-box" id="hint" style="display:none">찬반 구도로 3라운드 토론 후 투표.</div>
+    <div id="tlabel" style="display:none"></div>
+    <div id="ulabel" style="display:none"></div>
+    <div id="optsec" style="display:none"></div>
+    <div id="olabel" style="display:none"></div>
+
+    <div class="result-box" id="result">
+      <div class="result-header">
+        <div class="result-title">✅ 프롬프트 생성 완료</div>
+        <button class="copy-btn" id="cbtn" onclick="doCopy()">📋 복사</button>
+      </div>
+      <div class="result-preview" id="preview"></div>
+    </div>
+  </div>
+
+  <div class="table-stage" id="tableStage">
+    <div class="table-wrap" id="tableWrap">
+      <div class="table-ring"></div>
+      <div class="table-center">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="t-label">원탁</div>
+        <div class="t-count" id="seatCount">0명 착석</div>
+      </div>
+    </div>
+    <div class="table-empty" id="tableEmpty">
+      <div class="t-title">토론을 시작해보세요</div>
+      <div class="t-sub">상단에 주제를 입력하고 가운데에서 참여자를 고른 뒤<br>오른쪽 설정에서 시작을 누르면 대화가 펼쳐집니다.</div>
+    </div>
+  </div>
+
+  <div class="chat-box" id="chatBox">
+    <div id="chatStatus" style="padding:0 18px"></div>
+    <div id="chatStream" style="padding:0 18px"></div>
+  </div>
+  <div class="speed-ctrl">
+    <span class="speed-label">표시 속도</span>
+    <button class="speed-btn" data-spd="900" onclick="setSpeed(this,900)">느리게</button>
+    <button class="speed-btn on" data-spd="500" onclick="setSpeed(this,500)">보통</button>
+    <button class="speed-btn" data-spd="150" onclick="setSpeed(this,150)">빠르게</button>
+    <button class="speed-btn" data-spd="0" onclick="setSpeed(this,0)">즉시</button>
+    <button class="speed-btn" id="saveBtn" onclick="saveTranscript()" style="margin-left:auto">💾 저장하기</button>
+  </div>
+</div>
+</div>
+
+<div style="display:none" id="hiddenStubs">
+  <div id="chips"></div>
+  <input id="search" oninput="renderGrid()">
+</div>
+
+<script>
+const PERSONAS=[
+  // 정치·외교 (4)
+  {id:'kissinger',n:'키신저',c:'politics',col:'#2c3e50',e:'🌐',s:'냉전 외교 설계자. 냉혹한 현실주의. 힘의 균형이 평화를 만든다. 건조하고 분석적. 2023년 별세.'},
+  {id:'mearsheimer',n:'미어샤이머',c:'politics',col:'#4a1b0c',e:'⚔️',s:'시카고대 교수. 공격적 현실주의. 강대국 충돌 구조적 불가피론. 직설적 비관론자.'},
+  {id:'ikenberry',n:'아이켄베리',c:'politics',col:'#0c447c',e:'🕊️',s:'프린스턴대 정치학 석좌교수. 자유주의 국제질서론. 미중도 협력 토대를 찾을 수 있다. 다자주의·제도·상호의존 강조. 외교적이고 균형 잡힌 학술적 어조. 미어샤이머와 정확히 대척점.'},
+  {id:'ferguson',n:'퍼거슨',c:'politics',col:'#27500a',e:'📜',s:'하버드·스탠퍼드 역사학자. 보수적 역사주의. 서구 문명 옹호. 도발적이고 반직관적.'},
+  // 사상가 (4)
+  {id:'harari',n:'하라리',c:'thinker',col:'#784212',e:'📚',s:'사피엔스 저자. 히브리대 교수. AI와 바이오가 인류를 재정의한다. 철학적·도발적 질문.'},
+  {id:'chomsky',n:'촘스키',c:'thinker',col:'#1b2631',e:'✊',s:'MIT 언어학자·정치철학자. 미국 제국주의 비판. 권력 구조 해체론. 비판적·논리적.'},
+  {id:'bostrom',n:'보스트롬',c:'thinker',col:'#1a5276',e:'🤖',s:'옥스퍼드대 철학자. AGI는 인류 최대 실존 위협. AI 안전 연구. 냉정한 확률 계산.'},
+  {id:'diamond',n:'다이아몬드',c:'thinker',col:'#0e6655',e:'🗺️',s:'UCLA 교수. 총균쇠 저자(퓰리처상). 역사는 지리와 환경이 결정한다. 과학적·다학제적.'},
+  // 경제학자 (6, 신설)
+  {id:'kahneman',n:'카너먼',c:'economist',col:'#117a65',e:'🧠',s:'행동경제학자. 노벨 경제학상. 인간은 생각보다 훨씬 비합리적이다. 조용하고 반직관적. 2024년 별세.'},
+  {id:'acemoglu',n:'애쓰모글루',c:'economist',col:'#1a5276',e:'🏛️',s:'MIT 경제학 교수. 2024 노벨경제학상. 『국가는 왜 실패하는가』. 포용적 제도가 번영을 만들고 착취적 제도가 실패를 부른다. 제도·기술·국가경쟁력 분석. 학술적이고 데이터 기반, 단호한 어조.'},
+  {id:'mazzucato',n:'마추카토',c:'economist',col:'#8e44ad',e:'🚀',s:'UCL 교수. 혁신경제학자. 『기업가형 국가』. 공공부문이 혁신을 주도한다, 시장은 저절로 혁신하지 않는다. 국가의 역할을 적극 옹호. 도전적이고 정책지향적인 어조.'},
+  {id:'duflo',n:'듀플로',c:'economist',col:'#117a65',e:'🔬',s:'MIT 교수. 2019 노벨경제학상(역대 최연소). 무작위대조시험(RCT)으로 빈곤정책을 실증 검증. 이론보다 현장 데이터. 신중하고 실증적인 어조, 추상적 주장에 회의적.'},
+  {id:'krugman',n:'크루그먼',c:'economist',col:'#1f618d',e:'📉',s:'전 프린스턴대 교수, 뉴욕타임스 칼럼니스트. 2008 노벨경제학상. 무역이론·경제지리학. 케인스주의, 관세·보호무역 강하게 비판. 직설적이고 논쟁적, 데이터로 반박하는 스타일.'},
+  {id:'rogoff',n:'로고프',c:'economist',col:'#7d6608',e:'💰',s:'하버드대 교수, 전 IMF 수석경제학자. 『이번엔 다르다』(800년 금융위기사 실증분석). 국가부채·통화 분석. 여야 모두 비판하는 초당파적 실증주의. 차분하고 역사적 비유를 즐겨 사용.'},
+  // 과학 (5)
+  {id:'feynman',n:'파인만',c:'science',col:'#922b21',e:'⚛️',s:'물리학 노벨상. 본질적 사고. 모르면 모른다고 해야 한다. 유머러스하고 직관적. 1988년 별세.'},
+  {id:'hinton',n:'힌튼',c:'science',col:'#154360',e:'🧬',s:'AI 대부. 딥러닝 창시자. 노벨상 수상. AI가 인류를 위협할 수 있다. 조심스럽고 때로 비관적.'},
+  {id:'hassabis',n:'허사비스',c:'science',col:'#0e6655',e:'♟️',s:'Google DeepMind CEO. AlphaFold·AlphaGo 창조자. AGI는 오지만 과학적으로 접근. 차분하고 정밀.'},
+  {id:'andrewng',n:'앤드류 응',c:'science',col:'#1f618d',e:'🎓',s:'구글브레인·코세라 창업자. AI는 도구다. 잘 쓰면 된다. 명쾌하고 실용적·긍정적.'},
+  {id:'dawkins',n:'도킨스',c:'science',col:'#6c3483',e:'🔬',s:'진화생물학자. 이기적 유전자 저자. 모든 것은 유전자와 진화로 설명된다. 도전적·논쟁 즐김.'},
+  // 기업인 (7)
+  {id:'musk',n:'머스커',c:'business',col:'#7d6608',e:'🚀',s:'Tesla·SpaceX·X 창업자를 모티프로 한 가상 페르소나. 제1원칙으로 모든 것을 다시 설계한다. 도발적·직설적·단문.'},
+  {id:'jobs',n:'잡스',c:'business',col:'#922b21',e:'🍎',s:'Apple 공동창업자. 기술은 인문학과 만날 때 의미가 생긴다. 철학적·독선적. 2011년 별세.'},
+  {id:'bezos',n:'베조스',c:'business',col:'#b7770d',e:'📦',s:'Amazon·Blue Origin 창업자를 모티프로 한 가상 페르소나. Day One. 항상 창업 첫날처럼. 체계적·장기 관점·고객 집착.'},
+  {id:'jensen',n:'젠슨 항',c:'business',col:'#4a3a9e',e:'🎮',s:'NVIDIA CEO를 모티프로 한 가상 페르소나. AI는 새로운 산업혁명. 풀스택 독점이 유일한 생존 전략. 열정적·대담·선언적.'},
+  {id:'lisasu',n:'리사 서',c:'business',col:'#0F6E56',e:'💻',s:'AMD CEO를 모티프로 한 가상 페르소나. 실행이 전략을 이긴다. 고객이 원하는 걸 제때 만드는 것이 전부. 차분하고 데이터 기반.'},
+  {id:'amodei',n:'아모다이',c:'business',col:'#3B6D11',e:'🛡️',s:'Anthropic CEO를 모티프로 한 가상 페르소나. AI는 강력할수록 안전이 먼저다. AI 안전·LLM·규제·거버넌스. 신중하고 학술적.'},
+  {id:'inamori',n:'이나모리',c:'business',col:'#922b21',e:'🪷',s:'교세라 창업자. 일본 3대 경영자. 55년 무적자 경영, 파산 직전 JAL을 2년 반 만에 회생. 아메바 경영·경천애인 철학. 동양적 경영철학, 인간 본성과 도덕을 강조. 차분하고 격언체. 2022년 별세.'},
+  // 경영전략 (3, 신설)
+  {id:'porter',n:'포터',c:'strategy',col:'#1a5276',e:'📐',s:'하버드 경영대 교수. 경쟁전략의 아버지, 인용수 세계 최고 경영학자. 5가지 경쟁요인·본원적 전략·국가경쟁력 클러스터론. 산업구조와 위치 선정이 수익을 결정한다. 분석적이고 체계적인 어조.'},
+  {id:'hamel',n:'하멜',c:'strategy',col:'#6c3483',e:'💡',s:'경영전략가, 핵심역량(core competence) 이론가. 기업 내부 역량과 혁신 문화가 경쟁력의 원천이다, 산업구조보다 조직 역량이 먼저다. 포터와 대척점. 열정적이고 도발적인 변화 옹호자.'},
+  {id:'christensen',n:'크리스텐슨',c:'strategy',col:'#0e6655',e:'🌊',s:'하버드 경영대 교수. 파괴적 혁신 이론의 창시자. 기존 강자는 합리적 의사결정 때문에 오히려 신생기업에 시장을 뺏긴다. 인텔·코닥 등 사례 분석. 차분하고 사례 중심적인 설명 방식.'},
+  // 투자자 (5)
+  {id:'buffett',n:'버핏',c:'investor',col:'#1e8449',e:'💎',s:'버크셔 해서웨이 회장. 좋은 사업을 합리적 가격에 사서 영원히 보유하라. 인간적·유머러스·본질 파악.'},
+  {id:'dalio',n:'달리오',c:'investor',col:'#639922',e:'📊',s:'브리지워터 창업자. 모든 것은 원칙으로 환원된다. 사이클은 반복된다. 구조적·원칙 기반.'},
+  {id:'soros',n:'소로스',c:'investor',col:'#1a5276',e:'💱',s:'헤지펀드 투자자. 시장은 항상 틀린 가격을 매긴다. 반사성이 핵심. 철학적·반직관적.'},
+  {id:'lynch',n:'린치',c:'investor',col:'#117a65',e:'📈',s:'마젤란 펀드 매니저. 아는 것에 투자하라. 개인투자자도 기관을 이길 수 있다. 친근하고 실용적.'},
+  {id:'thiel',n:'티엘',c:'investor',col:'#6c3483',e:'🔑',s:'PayPal·Palantir 공동창업자를 모티프로 한 가상 페르소나. 경쟁은 패자의 게임. 독점만이 살아남는다. 역발상적·도발적.'},
+  // 한국 커스텀 (5)
+  {id:'leebyungchul',n:'호암',c:'custom',col:'#1b2631',e:'⚡',x:1,s:'삼성그룹 창업주(호 호암). 인재제일 철학("기업은 사람이다"). 사업보국·합리주의 경영. 1984년 반도체 산업 투자를 직접 결단. 신중하고 장기적인 안목, 격식 있는 어조. 1987년 이후 데이터 없음을 발언에 반드시 반영. [커스텀 페르소나 — 정의된 세계관 철저히 구현]'},
+  {id:'imsabu',n:'사부님',c:'custom',col:'#8e44ad',e:'🏮',x:1,s:'한국 투자·거시경제 교육자(필명). 역사적 사이클과 경제 원리로 투자 철학 정립. 쉬운 언어로 복잡한 경제 설명. 과도한 낙관·비관 모두 경계. 데이터·패턴 중시. [커스텀 페르소나 — 정의된 세계관 철저히 구현]'},
+  {id:'mer',n:'메르',c:'custom',col:'#2471a3',e:'📰',x:1,s:'한국 1위 경제 블로거(필명). 저서: 1%를 읽는 힘. 거시경제·국제정세를 투자자 시각으로 해석. 속보보다 이면의 맥락·연결고리 분석. 발언 시 반드시 "1. 2. 3." 번호 매기기 문체 사용. [커스텀 페르소나 — 정의된 세계관 철저히 구현]'},
+  {id:'sayno',n:'세이노',c:'custom',col:'#7b241c',e:'🔥',x:1,s:'자수성가 1000억 자산가·칼럼니스트(필명). 저서: 세이노의 가르침. Say No — 당신이 믿는 것에 No라고 외쳐라. Fuck You Money 확보가 자유의 조건. 직설적·냉혹하지만 따뜻한 잔소리 스타일. [커스텀 페르소나 — 정의된 세계관 철저히 구현]'},
+];
+
+// ===== AI 제공자 / API 키 설정 (사용자가 직접 입력, 이 브라우저에만 저장) =====
+const SETTINGS_KEY='mbod_api_settings_v1';
+const PROVIDER_META={
+  anthropic:{
+    label:'Anthropic (Claude)',
+    defaultModel:'claude-sonnet-4-5-20250929',
+    keyPlaceholder:'sk-ant-...',
+    keyHint:'API 키 발급: <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a>. 최신 모델 ID는 <a href="https://docs.claude.com/en/docs/about-claude/models" target="_blank" rel="noopener">공식 문서</a>에서 확인하세요.'
+  },
+  openai:{
+    label:'OpenAI (GPT)',
+    defaultModel:'gpt-4o-mini',
+    keyPlaceholder:'sk-...',
+    keyHint:'API 키 발급: <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>.'
+  },
+  gemini:{
+    label:'Google (Gemini)',
+    defaultModel:'gemini-2.0-flash',
+    keyPlaceholder:'AIza...',
+    keyHint:'API 키 발급: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>.'
+  },
+  custom:{
+    label:'커스텀 (OpenAI 호환)',
+    defaultModel:'',
+    keyPlaceholder:'API 키 (필요 없으면 비워두기)',
+    keyHint:'OpenRouter, Groq, 로컬 LLM 서버(Ollama 등 OpenAI 호환 프록시) 등 /chat/completions 엔드포인트를 지원하는 곳이면 사용 가능합니다.'
+  }
+};
+let curProvider='anthropic';
+let appSettings=null;
+
+function loadSettingsFromStorage(){
+  try{
+    const raw=localStorage.getItem(SETTINGS_KEY);
+    return raw?JSON.parse(raw):null;
+  }catch(e){return null;}
+}
+function refreshKeyDot(){
+  const gear=document.getElementById('topGear');
+  const s=loadSettingsFromStorage();
+  gear.classList.toggle('has-key',!!(s&&s.apiKey));
+}
+function setProvider(p){
+  curProvider=p;
+  document.querySelectorAll('.provider-tab').forEach(b=>b.classList.toggle('active',b.dataset.provider===p));
+  document.getElementById('baseUrlField').style.display=p==='custom'?'block':'none';
+  const meta=PROVIDER_META[p];
+  document.getElementById('apiKeyInput').placeholder=meta.keyPlaceholder;
+  document.getElementById('keyHint').innerHTML=meta.keyHint;
+  const modelInput=document.getElementById('modelInput');
+  if(!modelInput.dataset.userEdited || !modelInput.value){
+    modelInput.value=meta.defaultModel;
+  }
+  modelInput.placeholder=meta.defaultModel||'모델 ID 입력';
+}
+function openSettings(){
+  const s=loadSettingsFromStorage()||{};
+  const p=s.provider||'anthropic';
+  setProvider(p);
+  document.getElementById('apiKeyInput').value=s.apiKey||'';
+  document.getElementById('modelInput').value=s.model||PROVIDER_META[p].defaultModel;
+  document.getElementById('modelInput').dataset.userEdited=s.model?'1':'';
+  document.getElementById('baseUrlInput').value=s.baseUrl||'';
+  document.getElementById('settingsStatus').textContent='';
+  document.getElementById('settingsModal').classList.add('show');
+}
+function closeSettings(){document.getElementById('settingsModal').classList.remove('show');}
+document.addEventListener('DOMContentLoaded',()=>{
+  const mi=document.getElementById('modelInput');
+  if(mi)mi.addEventListener('input',()=>{mi.dataset.userEdited='1';});
+});
+function saveSettings(){
+  const apiKey=document.getElementById('apiKeyInput').value.trim();
+  const model=document.getElementById('modelInput').value.trim()||PROVIDER_META[curProvider].defaultModel;
+  const baseUrl=document.getElementById('baseUrlInput').value.trim();
+  const status=document.getElementById('settingsStatus');
+  if(curProvider!=='custom'&&!apiKey){status.className='settings-status err';status.textContent='API 키를 입력하세요.';return;}
+  if(curProvider==='custom'&&!baseUrl){status.className='settings-status err';status.textContent='커스텀 제공자는 Base URL이 필요합니다.';return;}
+  const data={provider:curProvider,apiKey,model,baseUrl};
+  try{
+    localStorage.setItem(SETTINGS_KEY,JSON.stringify(data));
+    appSettings=data;
+    status.className='settings-status ok';status.textContent='✅ 저장되었습니다.';
+    refreshKeyDot();
+    setTimeout(closeSettings,600);
+  }catch(e){
+    status.className='settings-status err';status.textContent='저장 실패: '+String(e);
+  }
+}
+function clearSettings(){
+  localStorage.removeItem(SETTINGS_KEY);
+  appSettings=null;
+  document.getElementById('apiKeyInput').value='';
+  document.getElementById('baseUrlInput').value='';
+  document.getElementById('settingsStatus').className='settings-status ok';
+  document.getElementById('settingsStatus').textContent='🗑 삭제되었습니다.';
+  refreshKeyDot();
+}
+document.getElementById('settingsModal').addEventListener('click',(e)=>{
+  if(e.target.id==='settingsModal')closeSettings();
+});
+
+// 선택된 제공자로 프롬프트를 보내고 {text, truncated}를 반환
+async function callProvider(prompt){
+  const s=loadSettingsFromStorage();
+  if(!s||!s.provider||(s.provider!=='custom'&&!s.apiKey)){
+    openSettings();
+    throw {userMessage:'먼저 설정(⚙️)에서 AI 제공자와 API 키를 입력해주세요.'};
+  }
+  const model=s.model||PROVIDER_META[s.provider].defaultModel;
+  try{
+    if(s.provider==='anthropic'){
+      const res=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'x-api-key':s.apiKey,
+          'anthropic-version':'2023-06-01',
+          'anthropic-dangerous-direct-browser-access':'true'
+        },
+        body:JSON.stringify({model,max_tokens:4096,messages:[{role:'user',content:prompt}]})
+      });
+      const data=await res.json();
+      if(!res.ok)throw {userMessage:(data.error&&data.error.message)||'Anthropic API 오류',detail:JSON.stringify(data)};
+      const text=(data.content||[]).map(c=>c.text||'').join('');
+      return {text,truncated:data.stop_reason==='max_tokens'};
+    }
+    if(s.provider==='openai'){
+      const res=await fetch('https://api.openai.com/v1/chat/completions',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+s.apiKey},
+        body:JSON.stringify({model,max_tokens:4096,messages:[{role:'user',content:prompt}]})
+      });
+      const data=await res.json();
+      if(!res.ok)throw {userMessage:(data.error&&data.error.message)||'OpenAI API 오류',detail:JSON.stringify(data)};
+      const choice=(data.choices||[])[0]||{};
+      return {text:(choice.message&&choice.message.content)||'',truncated:choice.finish_reason==='length'};
+    }
+    if(s.provider==='gemini'){
+      const url=`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(s.apiKey)}`;
+      const res=await fetch(url,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+      });
+      const data=await res.json();
+      if(!res.ok)throw {userMessage:(data.error&&data.error.message)||'Gemini API 오류',detail:JSON.stringify(data)};
+      const cand=(data.candidates||[])[0]||{};
+      const text=((cand.content&&cand.content.parts)||[]).map(p=>p.text||'').join('');
+      return {text,truncated:cand.finishReason==='MAX_TOKENS'};
+    }
+    if(s.provider==='custom'){
+      const base=(s.baseUrl||'').replace(/\/+$/,'');
+      const headers={'Content-Type':'application/json'};
+      if(s.apiKey)headers['Authorization']='Bearer '+s.apiKey;
+      const res=await fetch(base+'/chat/completions',{
+        method:'POST',headers,
+        body:JSON.stringify({model,max_tokens:4096,messages:[{role:'user',content:prompt}]})
+      });
+      const data=await res.json();
+      if(!res.ok)throw {userMessage:(data.error&&(data.error.message||data.error))||'커스텀 API 오류',detail:JSON.stringify(data)};
+      const choice=(data.choices||[])[0]||{};
+      return {text:(choice.message&&choice.message.content)||'',truncated:choice.finish_reason==='length'};
+    }
+  }catch(err){
+    if(err&&err.userMessage)throw err;
+    throw {userMessage:'네트워크/CORS 오류로 요청이 실패했습니다. 제공자가 브라우저 직접 호출(CORS)을 허용하는지 확인하세요.',detail:String(err)};
+  }
+  throw {userMessage:'알 수 없는 제공자입니다.'};
+}
+
+const sel=new Set();
+const teamOf=new Map(); // 배틀모드: personaId -> 'A' | 'B'
+let cMode='debate',cDiff='general',cCat='all',selOpt='',gPrompt='';
+const MODES={
+  debate:{h:'찬반 구도로 3라운드 토론 후 투표.',tl:'토론 주제',ul:'내 입장',up:'예: AI 위험론에 동의한다',so:1,ol:'토론 방식',opts:['⚔️ 배틀','🪑 원탁','⏳ 시대 충돌','🎲 랜덤']},
+  discussion:{h:'고민을 공유하면 조언합니다.',tl:'고민 또는 질문',ul:'내 상황 / 배경',up:'예: 30년 경력 CEO. 디지털 전환 고민',so:1,ol:'의논 방식',opts:['💬 자유','🔄 순서대로','🎯 핵심만']},
+  meeting:{h:'사용자가 의장. 동등한 참여자로 논의.',tl:'회의 안건',ul:'회의 목적',up:'예: AI 도입 여부 결정',so:1,ol:'회의 형태',opts:['📋 심의','🗳️ 투표','💡 브레인스토밍']},
+  consulting:{h:'전문가 1~3명이 문제를 분석하고 처방.',tl:'의뢰 문제',ul:'내 상황 (상세)',up:'예: NVIDIA 파트너 제안서 작성',so:1,ol:'컨설팅 스타일',opts:['🔍 진단','💊 솔루션','❓ 소크라테스']},
+  battle:{h:'A팀과 B팀으로 나뉘어 정면 충돌. 인원 제한 없음(5:5, 10:10도 가능).',tl:'충돌 주제',ul:'내 입장',up:'예: A팀 의견에 동의한다',so:0,team:true},
+  interrogation:{h:'1명을 깊게 파고드는 소크라테스식 대화. 질문→답변→역질문이 오갑니다.',tl:'인터뷰 주제 / 묻고 싶은 것',ul:'내 관심사',up:'예: 반도체 산업의 미래에 대해 묻고 싶다',so:0,single:true},
+  random:{h:'예상치 못한 조합.',tl:'토론 주제',ul:'내 입장',up:'',so:0},
+};
+
+function setMode(el){
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');cMode=el.dataset.mode;
+  sel.clear();teamOf.clear();
+  document.getElementById('tableStage').classList.remove('active');
+  const emptyMsg0=document.getElementById('tableEmpty');
+  if(emptyMsg0)emptyMsg0.style.display='block';
+  document.getElementById('chatBox').classList.remove('show');
+  renderGrid();updChips();
+  const m=MODES[cMode];
+  document.getElementById('hint').textContent=m.h;
+  document.getElementById('tlabel').textContent=m.tl;
+  document.getElementById('ulabel').textContent=m.ul;
+  document.getElementById('uinput').placeholder=m.up;
+  const os=document.getElementById('optsec');
+  if(m.so){
+    os.style.display='block';
+    document.getElementById('olabel').textContent=m.ol;
+    const row=document.getElementById('orow');row.innerHTML='';
+    selOpt=m.opts[0];
+    m.opts.forEach((o,i)=>{
+      const b=document.createElement('button');b.className='opt-btn'+(i===0?' active':'');b.textContent=o;
+      b.onclick=()=>{document.querySelectorAll('.opt-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selOpt=o;};
+      row.appendChild(b);
+    });
+  }else os.style.display='none';
+  updArow();
+}
+
+function updArow(){
+  const r=document.getElementById('arow');
+  if(cMode==='debate'||cMode==='battle') r.innerHTML='<button class="btn-main" onclick="go(\'full\')">🎯 전체 토론 (3R+투표)</button><button class="btn-sub" onclick="go(1)">1라운드</button><button class="btn-sub" onclick="go(2)">반박</button><button class="btn-sub" onclick="go(3)">심화</button><button class="btn-sub" onclick="go(\'vote\')">🗳 투표</button>';
+  else if(cMode==='discussion') r.innerHTML='<button class="btn-main" onclick="go(\'main\')">🤝 의논 생성</button><button class="btn-sub" onclick="go(\'summary\')">📋 요약</button>';
+  else if(cMode==='meeting') r.innerHTML='<button class="btn-main" onclick="go(\'main\')">🏢 회의 생성</button><button class="btn-sub" onclick="go(\'minutes\')">📝 회의록</button>';
+  else if(cMode==='consulting') r.innerHTML='<button class="btn-main" onclick="go(\'main\')">🎯 컨설팅 생성</button><button class="btn-sub" onclick="go(\'action\')">✅ 액션플랜</button>';
+  else if(cMode==='interrogation') r.innerHTML='<button class="btn-main" onclick="go(\'main\')">🎙 인터뷰 시작</button>';
+  else if(cMode==='random') r.innerHTML='<button class="btn-main" onclick="go(\'full\')">🎲 랜덤 토론 시작</button>';
+  else r.innerHTML='<button class="btn-main" onclick="go(\'main\')">프롬프트 생성</button>';
+}
+
+function setDiff(el,d){document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');cDiff=d;}
+function setCat(el){document.querySelectorAll('.cat-chip').forEach(b=>b.classList.remove('active'));el.classList.add('active');cCat=el.dataset.cat;renderGrid();}
+
+function pastelBg(hex){
+  // 진한 hex 색을 옅은 파스텔 배경으로 변환 (밝기 85% 정도로 흰색에 가깝게)
+  const h=hex.replace('#','');
+  const r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
+  const mix=(c)=>Math.round(c+(255-c)*0.82);
+  return `rgb(${mix(r)},${mix(g)},${mix(b)})`;
+}
+// 아바타 내용: p.img(나중에 추가될 만화 일러스트 URL)가 있으면 이미지, 없으면 폴백
+// preferEmoji: true면 이모지(p.e) 우선(말풍선·좌석), false면 이니셜 우선(카드)
+function avatarInner(p,preferEmoji){
+  if(p.img)return `<img src="${p.img}" alt="${p.n}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block">`;
+  return preferEmoji?(p.e||p.ini||p.n[0]):(p.ini||p.n[0]);
+}
+function avatarBg(p,pastel){
+  if(p.img)return 'transparent';
+  return pastel?pastelBg(p.col):p.col;
+}
+function renderGrid(){
+  const g=document.getElementById('pgrid');
+  const q=document.getElementById('search').value.toLowerCase();
+  g.innerHTML='';
+  const isBattle=cMode==='battle';
+  PERSONAS.forEach(p=>{
+    const mc=cCat==='all'||p.c===cCat;
+    const mq=p.n.toLowerCase().includes(q);
+    const el=document.createElement('div');
+    const team=teamOf.get(p.id);
+    el.className='pc'+(sel.has(p.id)?' sel':'')+(team==='A'?' team-a':'')+(team==='B'?' team-b':'')+((!mc||!mq)?' hidden':'');
+    if(isBattle){
+      el.onclick=()=>{
+        // 미선택 → A팀 → B팀 → 미선택 순환. 인원 제한 없음(5:5, 10:10도 가능).
+        const cur=teamOf.get(p.id);
+        if(cur===undefined){
+          teamOf.set(p.id,'A');sel.add(p.id);
+        }else if(cur==='A'){
+          teamOf.set(p.id,'B');
+        }else{
+          teamOf.delete(p.id);sel.delete(p.id);
+        }
+        renderGrid();updChips();
+      };
+    }else{
+      el.onclick=()=>{sel.has(p.id)?sel.delete(p.id):sel.add(p.id);renderGrid();updChips();};
+    }
+    const badge=team?`<div class="team-badge">${team}</div>`:'';
+    el.innerHTML=`<div class="pchk">✓</div><div class="pav" style="background:${avatarBg(p,true)};color:${p.col}">${avatarInner(p)}${p.x?'<div class="cstar">★</div>':''}${badge}</div><div class="pname">${p.n}</div>`;
+    el.setAttribute('data-pname',p.n);
+    if(p.s)el.setAttribute('data-pdesc',p.s);
+    g.appendChild(el);
+  });
+}
+
+function updChips(){
+  const list=PERSONAS.filter(p=>sel.has(p.id));
+  const ta=document.getElementById('topAvatars');
+  if(ta){
+    ta.innerHTML='';
+    list.slice(0,4).forEach(p=>{
+      const av=document.createElement('div');av.className='top-av';
+      av.style.background=p.col;av.textContent=p.ini||p.n[0];av.title=p.n;
+      ta.appendChild(av);
+    });
+    if(list.length>4){
+      const more=document.createElement('div');more.className='top-av';
+      more.style.background='var(--gray400)';more.textContent='+'+(list.length-4);
+      ta.appendChild(more);
+    }
+  }
+  document.getElementById('selcount').textContent=sel.size;
+  renderTable(list);
+}
+
+// 원탁 시각화: 선택된 참여자를 원형으로 배치 (.table-wrap 380px 기준)
+function renderTable(list){
+  const wrap=document.getElementById('tableWrap');
+  if(!wrap)return;
+  wrap.querySelectorAll('.seat').forEach(s=>s.remove());
+  const n=list.length;
+  document.getElementById('seatCount').textContent=n+'명 착석';
+  const isMini=document.getElementById('tableStage').classList.contains('active');
+  // 큰 원탁(282px): 중심141, R116, 좌석반폭24(48px) / 미니 원탁(64px, 토론중): 중심32, R20, 좌석반폭11(22px)
+  const CENTER=isMini?32:141, R=isMini?20:116, HALF=isMini?11:24;
+  list.forEach((p,i)=>{
+    const angle=(i/n)*2*Math.PI - Math.PI/2;
+    const x=CENTER+R*Math.cos(angle)-HALF;
+    const y=CENTER+R*Math.sin(angle)-HALF;
+    const seat=document.createElement('div');
+    seat.className='seat';
+    seat.style.left=x+'px';
+    seat.style.top=y+'px';
+    seat.style.background=avatarBg(p,true);
+    seat.style.color=p.col;
+    seat.style.animationDelay=(i*0.04)+'s';
+    seat.title=p.n;
+    seat.innerHTML=avatarInner(p,false);
+    wrap.appendChild(seat);
+  });
+}
+
+function del(id){sel.delete(id);teamOf.delete(id);renderGrid();updChips();}
+function clearAll(){sel.clear();teamOf.clear();renderGrid();updChips();}
+function randomSelect(){sel.clear();teamOf.clear();[...PERSONAS].sort(()=>Math.random()-.5).slice(0,5).forEach(p=>sel.add(p.id));renderGrid();updChips();}
+
+function bldList(){
+  const list=PERSONAS.filter(p=>sel.has(p.id));
+  if(cMode==='battle'&&teamOf.size>0){
+    const teamA=list.filter(p=>teamOf.get(p.id)==='A');
+    const teamB=list.filter(p=>teamOf.get(p.id)==='B');
+    const fmt=arr=>arr.map(p=>`  • ${p.n}: ${p.s}`).join('\n');
+    return `[A팀]\n${fmt(teamA)}\n\n[B팀]\n${fmt(teamB)}`;
+  }
+  return list.map(p=>`• ${p.n}: ${p.s}`).join('\n');
+}
+function getDiff(){return cDiff==='expert'?'전문가 난이도: 전문 용어·데이터·학술 개념 풀 활용. 비유 최소화.':'일반 난이도: 비유와 예시 적극 활용. 누구나 이해할 수 있게.';}
+
+const DF=`발언 형식 (말풍선 스타일):\n**{이름}** [→ {상대방}에게] (선택)\n발언 1~3문장. 짧고 날카롭게. 핵심 인사이트를 담아.\n---`;
+// 의논/회의/컨설팅용 간소화 형식 — 화살표(→) 없이, 그러나 **이름** 표기는 반드시 유지
+// (이게 없으면 화면 말풍선 파서가 발언자를 못 찾아 이름이 안 보이는 버그가 생김)
+const DF_SIMPLE=`발언 형식 (반드시 지킬 것):\n**{이름}**\n발언 2~4문장. 존댓말.\n---\n(각 발언은 반드시 **이름** 으로 시작. 이름 없이 서술하지 말 것)`;
+const DR=`규칙:\n- 한 번에 한 명씩, 라운드당 8~12턴\n- 상대방 이름 직접 언급, 존댓말 유지\n- 표면적 주장이 아니라 각자의 세계관·전문성에서 나오는 깊은 통찰 제시\n- 입장 변화 시 [입장 변화 ⚡] 태그\n- 커스텀 페르소나(⭐)는 정의된 세계관 철저히 구현\n- 메르는 반드시 "1. 2. 3." 번호 매기기 문체 사용\n- 별세·은퇴 인물은 해당 시점 이후 데이터 없음을 발언에 반영`;
+const VF=`## 🗳 최종 투표\n**쟁점:** [한 줄 정의]\n| 이름 | 입장 | 핵심 근거 | 입장 변화 |\n|---|---|---|---|\n**결과:** 찬성 N / 반대 N / 중립 N\n**사회자:** 2~3줄 총평 + 미결 쟁점`;
+
+function go(t){
+  const topic=document.getElementById('topic').value.trim();
+  if(!topic){alert('주제를 입력하세요');return;}
+  if(sel.size===0){alert('참여자를 1명 이상 선택하세요.');return;}
+  const personas=bldList();
+  const user=document.getElementById('uinput').value.trim();
+  const so=selOpt||'';
+  const diff=getDiff();
+  const search=`먼저 "${topic}"에 대해 웹서치로 최신 데이터 수집 후 [브리핑] 한 문단 요약.\n\n`;
+  let prompt='';
+  if(['debate','battle','random'].includes(cMode)){
+    const ms=cMode==='debate'?(so.includes('원탁')?'🪑 원탁':'⚔️ 일반 토론'):cMode==='battle'?'🔥 배틀(팀전)':'🎲 랜덤';
+    const ub=user?`\n👤 사용자: "${user}"`:'';
+    const hd=`${search}[My Board of Directors — 마이 보드 디렉터]\n주제: ${topic}\n모드: ${ms}${ub}\n난이도: ${diff}\n\n참여자:\n${personas}\n\n${DF}\n${DR}`;
+    const battleNote=cMode==='battle'?'\nA팀과 B팀이 명확히 대립하는 구도로, 같은 팀끼리는 서로 지원하고 다른 팀에게는 날카롭게 반박하세요.':'';
+    if(t==='full'||t==='main') prompt=`${hd}${battleNote}\n\n1라운드→2라운드→3라운드→최종투표.\n각 라운드 8~12턴.\n\n${VF}`;
+    else if(t===1) prompt=`${hd}${battleNote}\n\n1라운드: 초기 입장. 8~12턴.`;
+    else if(t===2) prompt=`${hd}${battleNote}\n\n2라운드: 반박. 8~12턴.`;
+    else if(t===3) prompt=`${hd}${battleNote}\n\n3라운드: 심화. 8~12턴.`;
+    else if(t==='vote') prompt=`[투표]\n주제: ${topic}\n참여자:\n${personas}\n\n${VF}`;
+  }else if(cMode==='interrogation'){
+    if(sel.size!==1){alert('인터뷰 모드는 정확히 1명을 선택해야 합니다.');return;}
+    const ub=user?`\n👤 사용자가 특히 묻고 싶은 것: "${user}"`:'';
+    prompt=`${search}[My Board of Directors — 인터뷰]\n주제: ${topic}\n인터뷰 대상:\n${personas}${ub}\n난이도: ${diff}\n\n발언 형식:\n**{이름}** 발언 2~4문장.\n---\n\n사용자가 인터뷰어가 되어 소크라테스식 대화를 나눕니다. 질문 → 깊은 답변 → 답변 속에서 새로운 질문 도출 → 때로는 인터뷰 대상이 거꾸로 사용자에게 되묻기. 표면적 답이 아니라 전제를 캐묻고 모순을 짚어내는 식으로 8~12턴 진행. 마지막에 [💬 사용자 차례] 표시로 사용자가 추가 질문할 수 있게 마무리.`;
+  }else if(cMode==='discussion'){
+    const style=so.includes('순서')?'🔄 1인씩 순서대로':so.includes('핵심')?'🎯 핵심 2~3명만':'💬 자유 의논';
+    if(t==='summary') prompt=`앞선 의논을 요약해주세요. 핵심 조언 3가지와 미결 질문 정리.\n\n참여자:\n${personas}`;
+    else prompt=`[의논]\n고민: ${topic}\n상황: ${user||'미입력'}\n방식: ${style}\n\n참여자:\n${personas}\n\n${DF_SIMPLE}`;
+  }else if(cMode==='meeting'){
+    const style=so.includes('브레인')?'📋 브레인스토밍':so.includes('투표')?'🗳️ 투표로 결론':'📋 자유 토론';
+    if(t==='minutes') prompt=`회의록을 작성해주세요. 안건·주요 발언·결론·후속 액션 포함.\n\n안건: ${topic}\n참여자:\n${personas}`;
+    else prompt=`[회의]\n안건: ${topic}\n의장: ${user||'미입력'}\n형태: ${style}\n\n참여자:\n${personas}\n\n${DF_SIMPLE}\n자유 토론 6~8턴.`;
+  }else if(cMode==='consulting'){
+    const style=so.includes('진단')?'🔍 문제 진단 우선':so.includes('소크라테스')?'❓ 소크라테스식 질문':'💊 솔루션 바로 제시';
+    if(t==='action') prompt=`지금 당장 실행 가능한 30일 액션 플랜. 주차별 구체적 태스크 포함.\n\n의뢰 문제: ${topic}\n참여자:\n${personas}`;
+    else prompt=`[컨설팅]\n문제: ${topic}\n상황: ${user||'미입력'}\n스타일: ${style}\n\n참여자:\n${personas}\n\n${DF_SIMPLE}\n진단→처방 3가지.`;
+  }
+  gPrompt=prompt;
+  if(runMode==='auto'){
+    runAutoDebate(prompt);
+  }else{
+    const prev=document.getElementById('preview');
+    prev.textContent=prompt.length>500?prompt.substring(0,500)+'...':prompt;
+    const res=document.getElementById('result');
+    res.classList.add('show');
+    document.getElementById('cbtn').textContent='📋 복사';
+  }
+}
+
+// ===== 실행 모드 =====
+let runMode='auto';
+let convoHistory='';  // 라운드별 사용자 개입 시 누적
+let bubbleSpeed=500;  // 말풍선 표시 간격(ms), 0이면 즉시
+let loadTimer=null;
+function setRunMode(m){
+  runMode=m;
+  document.getElementById('modeAuto').classList.toggle('on',m==='auto');
+  document.getElementById('modeCopy').classList.toggle('on',m==='copy');
+  // 모드 바꾸면 기존 결과 숨김
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('chatBox').classList.remove('show');
+  document.getElementById('tableStage').classList.remove('active');
+  renderTable(PERSONAS.filter(p=>sel.has(p.id))); // 큰 원탁 좌표로 복원
+  const emptyMsg=document.getElementById('tableEmpty');
+  if(emptyMsg)emptyMsg.style.display='block';
+}
+function setSpeed(el,ms){
+  bubbleSpeed=ms;
+  document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ===== 자동 토론: 백엔드 호출 + 말풍선 순차 표시 =====
+async function runAutoDebate(prompt){
+  const box=document.getElementById('chatBox');
+  const stream=document.getElementById('chatStream');
+  const status=document.getElementById('chatStatus');
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('tableStage').classList.add('active');
+  renderTable(PERSONAS.filter(p=>sel.has(p.id))); // 미니 원탁 좌표로 좌석 재배치
+  const emptyMsg=document.getElementById('tableEmpty');
+  if(emptyMsg)emptyMsg.style.display='none';
+  box.classList.add('show');
+  stream.innerHTML='';
+  // 로딩 카드 + 경과 시간
+  const t0=Date.now();
+  if(loadTimer)clearInterval(loadTimer);
+  const renderLoad=()=>{
+    const sec=((Date.now()-t0)/1000).toFixed(0);
+    status.innerHTML=`<div class="loading-card"><div class="loading-spinner"></div><div><div class="loading-text">토론을 생성하고 있습니다</div><div class="loading-sub">웹 데이터 수집 → 라운드 구성 중 · 보통 10~30초</div></div><div class="loading-elapsed">${sec}초</div></div>`;
+  };
+  renderLoad();
+  loadTimer=setInterval(renderLoad,1000);
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  try{
+    const data=await callProvider(prompt);
+    if(loadTimer){clearInterval(loadTimer);loadTimer=null;}
+    const text=data.text||'';
+    convoHistory+='\n\n'+text;
+    await renderBubbles(text);
+    status.textContent = data.truncated ? '⚠️ 완료 (토론이 길어 일부 생략됨 — 라운드를 나눠 진행하면 더 완전합니다)' : '✅ 완료';
+    showUserTurn();
+  }catch(err){
+    if(loadTimer){clearInterval(loadTimer);loadTimer=null;}
+    const msg=(err&&err.userMessage)?err.userMessage:('네트워크 오류: '+String(err));
+    status.textContent='❌ '+msg+(err&&err.detail?(' — '+err.detail):'');
+  }
+}
+
+// 토론 텍스트를 말풍선 단위로 파싱
+function parseDebate(text){
+  const items=[];
+  const lines=text.split('\n');
+  let buf=null;
+  const flush=()=>{ if(buf){items.push(buf);buf=null;} };
+  for(const line of lines){
+    const l=line.trim();
+    if(!l){continue;}
+    // 투표 테이블/사회자 등은 통째로 vote 블록
+    if(l.startsWith('|')||l.startsWith('## 🗳')||l.startsWith('**쟁점:')||l.startsWith('**결과:')||l.startsWith('**사회자:')){
+      flush();
+      const last=items[items.length-1];
+      if(last&&last.type==='vote'){ last.text+='\n'+l; }
+      else items.push({type:'vote',text:l});
+      continue;
+    }
+    // 라운드 헤더
+    if(l.startsWith('##')||l.startsWith('---')){ flush(); continue; }
+    // **이름** [→ 상대] 발언  또는  **이름** 발언
+    const m=l.match(/^\*\*(.+?)\*\*\s*(.*)$/);
+    if(m){
+      flush();
+      let name=m[1].replace(/\s*\[.*?\]\s*/g,'').trim();
+      let rest=m[2];
+      let tag='';
+      const tagM=rest.match(/\[(입장 변화[^\]]*)\]/);
+      if(tagM){ tag=tagM[1]; rest=rest.replace(/\[입장 변화[^\]]*\]/,'').trim(); }
+      // 본문 앞 [→ 상대] 화살표 표시 제거
+      rest=rest.replace(/^\[→[^\]]*\]\s*/,'').trim();
+      buf={type:'msg',name,text:rest,tag};
+    }else if(buf){
+      buf.text+=(buf.text?'\n':'')+l;
+    }else{
+      // 브리핑 등 머리말
+      items.push({type:'note',text:l});
+    }
+  }
+  flush();
+  return items;
+}
+
+function findPersona(name){
+  const clean=name.trim();
+  // 정확히 일치, 또는 2자 이상 이름이 서로를 포함할 때만 매칭(짧은 이름의 우연한 부분일치 방지)
+  return PERSONAS.find(p=>p.n===clean)
+    || PERSONAS.find(p=>clean.length>=2&&p.n.length>=2&&(clean.includes(p.n)||p.n.includes(clean)))
+    || {col:'#8B95A1',e:'💬',n:clean,s:''};
+}
+
+// 인물 이름/설명을 data 속성으로만 표시(실제 카드는 전역 이벤트로 body에 fixed 배치)
+function nameAttrs(p){
+  if(!p.s)return '';
+  return ` data-pname="${esc(p.n)}" data-pdesc="${esc(p.s)}"`;
+}
+
+// 말풍선 순차 표시 (0.5초 간격)
+function renderBubbles(text){
+  return new Promise(resolve=>{
+    const stream=document.getElementById('chatStream');
+    const items=parseDebate(text);
+    let i=0;
+    function step(){
+      if(i>=items.length){resolve();return;}
+      const it=items[i++];
+      const div=document.createElement('div');
+      if(it.type==='msg'){
+        const p=findPersona(it.name);
+        div.className='bubble-row';
+        const tagHtml=it.tag?`<span class="bubble-tag">⚡ ${it.tag}</span>`:'';
+        div.innerHTML=`<div class="bubble-av" style="background:${avatarBg(p,false)}"${nameAttrs(p)}>${avatarInner(p,true)}</div><div class="bubble-col"><div class="bubble-name"${nameAttrs(p)}>${it.name}${tagHtml}</div><div class="bubble-msg">${esc(it.text)}</div></div>`;
+      }else if(it.type==='vote'){
+        div.className='vote-block';
+        div.textContent=it.text;
+      }else{
+        // 짧은 머리말([브리핑] 등)은 상태표시로, 길면 AI가 형식을 어긴 발언일 가능성이 높아 발언처럼 표시
+        if(it.text.length>40){
+          div.className='bubble-msg-unattributed';
+          div.textContent=it.text;
+        }else{
+          div.className='chat-status';
+          div.textContent=it.text;
+        }
+      }
+      stream.appendChild(div);
+      div.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(bubbleSpeed===0){ step(); }  // 즉시 모드: 끊김 없이 전부
+      else setTimeout(step, it.type==='msg'?bubbleSpeed:Math.round(bubbleSpeed*0.4));
+    }
+    step();
+  });
+}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// 라운드 끝 → 사용자 개입 입력창
+function showUserTurn(){
+  // 컨설팅 소크라테스는 문답식이라 제외
+  if(cMode==='consulting' && (selOpt||'').includes('소크라테스')) return;
+  const stream=document.getElementById('chatStream');
+  const wrap=document.createElement('div');
+  wrap.className='user-turn';
+  wrap.innerHTML=`<input type="text" id="userTurnInput" placeholder="여기에 내 의견을 넣고 토론에 참여하세요..."><button class="btn-main" onclick="submitUserTurn()">참여</button><button class="btn-sub" onclick="this.parentElement.remove()">건너뛰기</button>`;
+  stream.appendChild(wrap);
+  wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+async function submitUserTurn(){
+  const inp=document.getElementById('userTurnInput');
+  const val=(inp?.value||'').trim();
+  if(!val){alert('의견을 입력하세요');return;}
+  const stream=document.getElementById('chatStream');
+  // 내 말풍선 추가
+  const me=document.createElement('div');
+  me.className='bubble-row me';
+  me.innerHTML=`<div class="bubble-av" style="background:#3182F6">🙋</div><div class="bubble-col"><div class="bubble-name">나</div><div class="bubble-msg">${esc(val)}</div></div>`;
+  stream.appendChild(me);
+  // 입력창 제거
+  inp.closest('.user-turn').remove();
+  // 다음 라운드 요청 (히스토리 + 내 의견)
+  const followPrompt=`${convoHistory}\n\n[사용자 개입] "${val}"\n\n위 토론을 이어서, 사용자의 의견에 각 참여자가 반응하며 다음 라운드를 진행하세요. 같은 말풍선 형식(**이름** 발언). 6~10턴.`;
+  await runAutoDebate(followPrompt);
+}
+
+// 가운데(참여자 선택) 패널 접기/펼치기 — 접으면 우측(대화) 패널이 그만큼 넓어짐
+function toggleCenterCol(){
+  const col=document.getElementById('centerCol');
+  const btn=document.getElementById('collapseToggle');
+  const collapsed=col.classList.toggle('collapsed');
+  btn.classList.toggle('flipped',collapsed);
+  btn.title=collapsed?'참여자 패널 펼치기':'참여자 패널 접기';
+}
+
+function doCopy(){
+  navigator.clipboard.writeText(gPrompt).then(()=>{
+    const b=document.getElementById('cbtn');b.textContent='✅ 복사됨!';
+    setTimeout(()=>{b.textContent='📋 복사';},2500);
+  });
+}
+
+// 토론 내용 텍스트 파일로 저장
+function saveTranscript(){
+  if(!convoHistory.trim()){alert('저장할 토론 내용이 없습니다. 먼저 토론을 진행하세요.');return;}
+  const topic=(document.getElementById('topic').value||'토론').trim();
+  const now=new Date();
+  const dateStr=now.toISOString().slice(0,10);
+  const header=`My Board of Directors — 토론 기록\n주제: ${topic}\n저장일: ${dateStr}\n${'='.repeat(40)}\n\n`;
+  const blob=new Blob([header+convoHistory.trim()],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`토론기록_${topic.slice(0,20).replace(/[\\/:*?"<>|]/g,'')}_${dateStr}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  const b=document.getElementById('saveBtn');
+  if(b){const orig=b.textContent;b.textContent='✅ 저장됨!';setTimeout(()=>{b.textContent=orig;},2000);}
+}
+
+// 인물 프로필 툴팁: body에 직접 fixed로 띄워서 스크롤 영역 클리핑을 피함
+let profileTip=null;
+function showProfileTip(target){
+  hideProfileTip();
+  const name=target.getAttribute('data-pname'), desc=target.getAttribute('data-pdesc');
+  if(!name)return;
+  profileTip=document.createElement('div');
+  profileTip.className='profile-card-fixed';
+  profileTip.innerHTML=`<div class="pc-name">${name}</div><div class="pc-desc">${desc}</div>`;
+  document.body.appendChild(profileTip);
+  const r=target.getBoundingClientRect();
+  const tipW=230;
+  let left=r.left;
+  if(left+tipW>window.innerWidth-12)left=window.innerWidth-tipW-12;
+  if(left<12)left=12;
+  let top=r.top-profileTip.offsetHeight-8;
+  if(top<8)top=r.bottom+8; // 화면 위쪽 잘리면 아래로 표시
+  profileTip.style.left=left+'px';
+  profileTip.style.top=top+'px';
+}
+function hideProfileTip(){
+  if(profileTip){profileTip.remove();profileTip=null;}
+}
+document.addEventListener('mouseover',(e)=>{
+  const t=e.target.closest('[data-pname]');
+  if(t)showProfileTip(t);
+});
+document.addEventListener('mouseout',(e)=>{
+  const t=e.target.closest('[data-pname]');
+  if(t)hideProfileTip();
+});
+// 모바일 등 hover 없는 환경 대비: 탭하면 토글
+document.addEventListener('click',(e)=>{
+  if(e.target.closest('.pc'))return; // 참여자 선택 카드는 hover로만 프로필 표시, 클릭은 선택 전용
+  const t=e.target.closest('[data-pname]');
+  if(t){ profileTip?hideProfileTip():showProfileTip(t); }
+  else if(profileTip&&!e.target.closest('.profile-card-fixed')) hideProfileTip();
+});
+
+renderGrid();
+setMode(document.querySelector('.mode-btn'));
+updChips();
+refreshKeyDot();
+</script>
+</body>
+</html>

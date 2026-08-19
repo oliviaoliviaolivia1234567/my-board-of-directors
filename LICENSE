@@ -1,0 +1,45 @@
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+Copyright (c) 2026 Sonny (100bnsys@gmail.com)
+
+This project ("My Board of Directors") is licensed under the
+Creative Commons Attribution-NonCommercial 4.0 International License.
+
+You are free to:
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+  - Attribution — You must give appropriate credit to the original author
+    (Sonny), provide a link to this license, and indicate if changes were
+    made. You may do so in any reasonable manner, but not in any way that
+    suggests the licensor endorses you or your use.
+  - NonCommercial — You may NOT use the material for commercial purposes.
+    This includes, without limitation: selling the software or a modified
+    version of it, bundling it into a paid product or paid service,
+    running it behind a paywall or subscription, or using it to generate
+    advertising or referral revenue.
+  - No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing
+    anything the license permits.
+
+No warranties are given. The software is provided "as is", without
+warranty of any kind. See the full legal text of CC BY-NC 4.0 here:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+---
+
+Additional notes specific to this project:
+
+1. Persona content: The AI personas included in this project are
+   fictional simulations inspired by publicly known figures, built from
+   publicly available writings, interviews, and biographical summaries.
+   They do not represent the real individuals' actual views, statements,
+   or endorsements, and are provided for commentary, education, and
+   parody purposes only. See DISCLAIMER section in README.md.
+
+2. Third-party AI providers: This project does not include or
+   redistribute any AI model or API. Users must supply their own API
+   key(s) from the AI provider(s) of their choice (e.g. Anthropic,
+   OpenAI, Google), and are separately bound by those providers' own
+   terms of service, usage policies, and pricing.
